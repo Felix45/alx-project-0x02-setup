@@ -35,7 +35,7 @@ Start the pplication server
 
 ### Visit the deployment server
 visit this link: 
-[http://localhost](http://localhost:3000)
+[http://localhost:3000](http://localhost:3000)
 
 ## Basics of NextJS
 **Pages:** Files in the /pages directory automatically become routes.
