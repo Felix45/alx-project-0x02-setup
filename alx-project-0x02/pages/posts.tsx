@@ -1,26 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "@/components/common/PostCard";
 import Header from "@/components/layout/Header";
+import { GetStaticProps } from "next";
+import { type PostProps } from "@/interfaces";
 
-const Posts: React.FC = () => {
-    const [posts, setPosts] = useState([]);
-
-    const fetchPosts = async () => {
-        try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setPosts(data);
-        } catch (error) {
-            console.error('Error fetching posts:', error);
-        }
-    }
-
-    useEffect(() => {
-        fetchPosts();
-    }, []);
+const Posts: React.FC<{ posts: PostProps[] }> = ({ posts }) => {
 
     return (
         <section>
@@ -38,6 +22,28 @@ const Posts: React.FC = () => {
                 )}
         </section>
     );
+}
+
+export const getStaticProps: GetStaticProps<PostProps[]> = async () => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const posts: PostProps[] = await response.json();
+        return {
+            props: {
+                posts,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        return {
+            props: {
+                posts: [],
+            },
+        };
+    }
 }
 
 export default Posts;

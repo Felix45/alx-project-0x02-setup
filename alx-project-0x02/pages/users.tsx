@@ -1,27 +1,11 @@
 import UserCard from "@/components/common/UserCard";
 import React, { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
+import { UserProps } from "@/interfaces";
+import { GetStaticProps } from "next";
 
-const Users: React.FC = () => {
-    const [users, setUsers] = useState([]);
-
-    const fetchUsers = async () => {
-        try {
-            const response = await fetch("https://jsonplaceholder.typicode.com/users");
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            const data = await response.json();
-            setUsers(data);
-        } catch (error) {
-            console.error("Fetch error:", error);
-        }
-    }
-
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
+const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
+   
     return (
         <main>
             <Header />
@@ -49,6 +33,28 @@ const Users: React.FC = () => {
             </div>
         </main>
     );
+}
+
+export const getStaticProps: GetStaticProps<UserProps[]> = async () => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const users: UserProps[] = await response.json();
+        return {
+            props: {
+                users,
+            },
+        };
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        return {
+            props: {
+                users: [],
+            },
+        };
+    }
 }
 
 export default Users;
