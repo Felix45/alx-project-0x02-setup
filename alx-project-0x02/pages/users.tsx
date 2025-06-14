@@ -1,8 +1,8 @@
 import UserCard from "@/components/common/UserCard";
 import React, { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
-import { UserProps } from "@/interfaces";
 import { GetStaticProps } from "next";
+import { type UserProps } from "@/interfaces";
 
 const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
    
