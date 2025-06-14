@@ -35,7 +35,7 @@ const Users: React.FC<{ users: UserProps[] }> = ({ users }) => {
     );
 }
 
-export const getStaticProps: GetStaticProps<UserProps[]> = async () => {
+export const getStaticProps: GetStaticProps<{ users: UserProps[] }> = async () => {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/users');
         if (!response.ok) {
