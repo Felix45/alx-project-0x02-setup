@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "@/components/common/Card";
 import PostModal from "@/components/common/PostModal";
 import { CardProps } from "@/interfaces";
+import Header from "@/components/layout/Header";
 
 
 const Home: React.FC = () => {
@@ -21,6 +22,7 @@ const Home: React.FC = () => {
 
     return (
         <section>
+            <Header />
             <header className="flex justify-between items-center mb-4">
                 <h1 className="font-bold">Home page</h1>
                 <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleOpen}>

@@ -14,3 +14,24 @@ export interface PostModalProps {
     handleClose: () => void;
     handleCreatePost: (title: string, content: string) => void;
 }
+
+export interface PostProps {
+    userId: number;
+    title: string;
+    content: string;
+}
+
+export interface UserProps {
+    name: string;
+    email: string;
+    username: string;
+    address: {
+        street: string;
+        city: string;
+        zipcode: string;
+        geo: {
+            lat: string;
+            lng: string;
+        };
+    };
+}
